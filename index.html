@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Matriz inversa</title>
+  </head>
+  <body>
+    <div id="primeraPantalla" class="container">
+      <h1 style="margin: 20px 0px">Obtencion de la matriz inversa</h1>
+      <h2 style="margin-bottom: 10px">Ingrese una matriz</h2>
+      <form id="matrixFirstInput" onsubmit="return startProcess()">
+        <div id="main-matrix-rows">
+          <h1 class="main-matrix-row">
+            R<sub>1</sub>:
+            <input
+              onchange="changeEcuation(this)"
+              id="r1_x"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="x"
+              required
+            />
+            <input
+              onchange="changeEcuation(this)"
+              id="r1_y"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="y"
+              required
+            />
+            <input
+              onchange="changeEcuation(this)"
+              id="r1_z"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="z"
+              required
+            />
+            |
+            <input
+              id="r1_c1"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="1"
+              disabled
+            />
+            <input
+              id="r1_c2"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+            <input
+              id="r1_c3"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+          </h1>
+          <h1 class="main-matrix-row">
+            R<sub>2</sub>:
+            <input
+              id="r2_x"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="x"
+              required
+            />
+            <input
+              id="r2_y"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="y"
+              required
+            />
+            <input
+              id="r2_z"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="z"
+              required
+            />
+            |
+            <input
+              id="r2_c1"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+            <input
+              id="r2_c2"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="1"
+              disabled
+            />
+            <input
+              id="r2_c3"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+          </h1>
+          <h1 class="main-matrix-row">
+            R<sub>3</sub>:
+            <input
+              id="r3_x"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="x"
+              required
+            />
+            <input
+              id="r3_y"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="y"
+              required
+            />
+            <input
+              id="r3_z"
+              onchange="changeEcuation(this)"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              placeholder="z"
+              required
+            />
+            |
+            <input
+              id="r3_c1"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+            <input
+              id="r3_c2"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="0"
+              disabled
+            />
+            <input
+              id="r3_c3"
+              class="scalar-input main-matrix-i"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              value="1"
+              disabled
+            />
+          </h1>
+        </div>
+        <div id="equations">
+          <h2 class="equation" id="equation_1"></h2>
+          <h2 class="equation" id="equation_2"></h2>
+          <h2 class="equation" id="equation_3"></h2>
+        </div>
+        <button type="submit" class="btn-procesar" id="iniciarProcesoGJ">
+          Iniciar proceso
+        </button>
+      </form>
+    </div>
+    <div id="segundaPantalla" class="container c-hide">
+      <h1 style="margin-top: 20px">Eliminación de Gauss-Jordan</h1>
+      <div id="matrices-container"></div>
+      <h2 id="result" style="padding: 5px; border-radius: 5px"></h2>
+      <div id="math-container">
+        <form class="process-type" onsubmit="return ProcessMatrix(1)">
+          <h1>
+            R<sub
+              ><input
+                id="p1_r1"
+                onchange="document.getElementById('scalar-target-subindex').innerHTML = this.value"
+                class="row-input"
+                type="number"
+                min="1"
+                max="3"
+                required /></sub
+            >(<input
+              id="p1_coef1"
+              class="scalar-input"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              required
+            />) + R<sub
+              ><input
+                id="p1_r2"
+                class="row-input"
+                type="number"
+                min="1"
+                max="3"
+                required /></sub
+            >(<input
+              id="p1_coef2"
+              class="scalar-input"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              required
+            />) ⟶ R<sub id="scalar-target-subindex"> </sub>
+          </h1>
+          <button type="submit" class="btn-procesar">Procesar</button>
+        </form>
+        <form class="process-type" onsubmit="return ProcessMatrix(2)">
+          <h1>
+            R<sub
+              ><input
+                id="p2_r1"
+                class="row-input"
+                type="number"
+                min="1"
+                max="3"
+                required
+            /></sub>
+            ⟷ R<sub
+              ><input
+                id="p2_r2"
+                class="row-input"
+                type="number"
+                min="1"
+                max="3"
+                required
+            /></sub>
+          </h1>
+          <button type="submit" class="btn-procesar">Procesar</button>
+        </form>
+        <form class="process-type" onsubmit="return ProcessMatrix(3)">
+          <h1>
+            R<sub
+              ><input
+                id="p3_r1"
+                class="row-input"
+                onchange="document.getElementById('scalar-target-subindex-2').innerHTML = this.value"
+                type="number"
+                min="1"
+                max="3"
+                required
+            /></sub>
+            <span id="operation-btn" onclick="toogleOpBtn(this)">x</span>
+            (<input
+              id="p3_coef"
+              class="scalar-input"
+              style="padding: 5px"
+              type="number"
+              min="-999"
+              max="999"
+              required
+            />) ⟶ R<sub id="scalar-target-subindex-2"></sub>
+          </h1>
+          <button type="submit" class="btn-procesar">Procesar</button>
+        </form>
+        <button
+          class="btn-procesar"
+          style="
+            margin-top: 10px;
+            background-color: rgb(42, 122, 42);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            display: none;
+          "
+          onclick="automate()"
+        >
+          Resolución automática
+        </button>
+      </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
